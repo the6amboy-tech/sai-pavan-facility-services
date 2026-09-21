@@ -1,0 +1,6 @@
+"use client";
+import Link from "next/link";
+import { Menu, X, ArrowUpRight, Building2, Leaf } from "lucide-react";
+import { useState } from "react";
+export function Brand(){return <Link href="/" className="brand"><span className="brand-symbol"><Building2/><Leaf/></span><span><strong>SAI PAVAN</strong><small>FACILITY SERVICES</small></span></Link>}
+export default function SiteHeader(){const [open,setOpen]=useState(false); return <><div className="topbar"><div className="shell"><span>Tirupati, Andhra Pradesh</span><a href="mailto:info@saipavanfs.com">info@saipavanfs.com</a><a href="tel:8500229978">+91 85002 29978</a></div></div><header><div className="shell header-inner"><Brand/><button className="menu-button" aria-label="Toggle menu" onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button><nav className={open?"is-open":""}><Link href="/" onClick={()=>setOpen(false)}>Home</Link><Link href="/about" onClick={()=>setOpen(false)}>About</Link><Link href="/services" onClick={()=>setOpen(false)}>Services</Link><Link href="/industries" onClick={()=>setOpen(false)}>Industries</Link><Link href="/contact" onClick={()=>setOpen(false)} className="header-cta">Get a quote <ArrowUpRight size={15}/></Link></nav></div></header></>}
