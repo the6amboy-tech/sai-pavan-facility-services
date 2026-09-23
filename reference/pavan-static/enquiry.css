@@ -1,0 +1,19 @@
+.honeypot {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+}
+
+.form-status {
+  min-height: 1.4em;
+  margin: 13px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.form-status[data-state="success"] { color: #126f4a; }
+.form-status[data-state="error"] { color: #a13c32; }
+.submit-form:disabled { cursor: wait; opacity: .7; transform: none; }

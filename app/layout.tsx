@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./styles.css";
+import "./enquiry.css";
 
 export const metadata: Metadata = {
   title: "Sai Pavan Integrated Facility Services | Facility Management & Maintenance",

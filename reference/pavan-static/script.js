@@ -1,0 +1,42 @@
+const EMAIL = 'saipavanoffical@gmail.com';
+const PRIMARY_PHONE = '9700012237';
+const SECONDARY_PHONE = '8500229978';
+const services = [
+  ['Integrated Facility Management','Complete facility management and coordinated maintenance support for commercial, residential, institutional and industrial properties.','⌘','facility-management.png'],
+  ['Security Services','Professional security manpower and facility security support based on client requirements for offices, commercial properties, institutions and residential communities.','◉','https://lirp.cdn-website.com/7b147b2a/dms3rep/multi/opt/A%2Bmale%2Bsecurity%2Bguard%2Bin%2Ba%2Bdark%2Bblue%2Buniform%2Bspeaks%2Binto%2Ba%2Bwalkie-talkie%2Bin%2Ba%2Bbright-%2Bmodern%2Boffice%2Blobby-1920w.png'],
+  ['Housekeeping & Cleaning Services','Professional housekeeping, cleaning and routine facility-support services for commercial, residential, institutional and corporate environments.','✦','housekeeping.png'],
+  ['Painting & Wall Finishing Works','Interior and exterior painting, wall finishing, surface preparation, putty, primer and repainting solutions.','◐','painting.png'],
+  ['Carpentry & Interior Maintenance','Carpentry, woodwork, furniture repair, partitions, doors, fixtures and interior maintenance support.','▤','carpentry.png'],
+  ['Electrical Maintenance Works','Electrical maintenance, repair, installation support, lighting, wiring and routine electrical facility maintenance.','ϟ','electrical.png'],
+  ['Plumbing & Water Maintenance','Plumbing repairs, water-line maintenance, sanitary fixtures, leakage rectification and water-system support.','≋','plumbing.png'],
+  ['Civil Maintenance & Repair Works','Building repair, masonry, flooring, plastering, minor civil works and general property maintenance.','▦','civil.png'],
+  ['Welding & Metal Fabrication Works','Professional welding, metal fabrication, repair and custom fabrication solutions.','⌁','welding.png'],
+  ['MS / Steel Shed Fabrication','MS and structural steel shed fabrication and installation support for commercial, industrial and other requirements.','◇','steel-shed.png'],
+  ['Roofing Sheet / Shed Installation & Replacement','Roofing sheet installation, replacement, repair and shed maintenance solutions.','⌂','roofing.png'],
+  ['Car Parking Shed Works','Car parking shed fabrication, installation, repair and maintenance.','▱','parking-shed.png'],
+  ['Gates, Grills, Handrails & Staircase Fabrication','Custom fabrication and installation of gates, grills, handrails, staircases and related metal structures.','▥','gates-grills.png'],
+  ['Food Supply & Catering Support','Food supply and catering support for institutions, offices, events and facility requirements.','◒','catering.png'],
+  ['Event Organisation & Maintenance Support','Event setup, maintenance coordination, infrastructure support and on-site facility assistance.','✳','events.png'],
+  ['General Building Maintenance','Routine building maintenance, repairs, upkeep and coordinated property support.','▣','building-maintenance.png'],
+  ['Annual Maintenance Contracts (AMC)','Planned and ongoing maintenance support covering routine inspections, preventive maintenance, repairs and facility upkeep.','∞','amc.png'],
+  ['Corporate & Industrial Manpower Supply','Professional workforce support for corporate offices, commercial facilities and industrial operations based on client requirements.','◫','https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1400&q=85','Housekeeping Staff · Cleaning Staff · Facility Support Staff · Office Support Staff · Helpers · Maintenance Support Staff · Skilled / Semi-skilled Workforce'],
+  ['Residential House Painting & Finishing','Complete residential painting and finishing solutions for houses, apartments and residential properties.','◑','https://ustaylaboya.com/static/img/ic-cephe.webp?v=2025.01.27.1','Interior House Painting · Exterior House Painting · Putty & Surface Preparation · Primer · Ceiling & Texture Painting · Repainting · Doors, Windows, Gates & Grills · Surface Repair · Protective / Waterproof Coating']
+];
+const industries = ['Corporate Offices','Commercial Buildings','Residential Properties','Educational Institutions','Hospitals / Healthcare Facilities','Industrial Facilities','Retail & Commercial Spaces','Hotels / Hospitality','Property Management'];
+const grid = document.querySelector('#serviceGrid');
+grid.innerHTML = services.map(([name, desc, icon, image, detail], i) => { const imageUrl = image.startsWith('http') ? image : `assets/services/${image}`; const serviceMessage = `Hello, I am interested in ${name}. Please share the details and quotation.`; return `<article class="service-card service-card-photo" aria-label="Professional ${name} service" style="--service-image:url('${imageUrl}')"><div class="service-top"><span class="service-icon">${icon}</span><span class="service-no">${String(i+1).padStart(2,'0')}</span></div><h3>${name}</h3><p>${desc}</p>${detail ? `<p class="service-extra">${detail}</p>` : ''}<a class="enquire" data-service="${name}" href="https://wa.me/91${PRIMARY_PHONE}?text=${encodeURIComponent(serviceMessage)}" target="_blank" rel="noopener">Enquire Now <span>→</span></a></article>`}).join('');
+document.querySelector('#gallery .gallery-grid').innerHTML = services.map(([name,, , image]) => { const imageUrl = image.startsWith('http') ? image : `assets/services/${image}`; return `<article class="gallery-card" style="background-image:linear-gradient(180deg,transparent,rgba(7,28,43,.85)),url('${imageUrl}')"><span>${name}</span><p>Illustrative service visual</p></article>`}).join('');
+document.querySelectorAll('select[name="service"]').forEach(select => select.insertAdjacentHTML('beforeend', services.map(([s])=>`<option value="${s}">${s}</option>`).join('')));
+document.querySelector('#industryList').innerHTML = industries.map((item,i)=>`<div><span>${String(i+1).padStart(2,'0')}</span>${item}<b>↗</b></div>`).join('');
+document.querySelector('.why').id = 'why';
+document.querySelectorAll('input[type="email"]').forEach(input => { input.required = false; input.closest('label').childNodes[0].textContent = 'Email Address '; });
+const amcButton = document.querySelector('.open-quote');
+if (amcButton) amcButton.innerHTML = 'Request an AMC Consultation <b>→</b>';
+const dialog = document.querySelector('#enquiryDialog');
+function whatsappLink(service){const message=`Hello, I am interested in ${service}. Please share the details and quotation.`;return `https://wa.me/91${PRIMARY_PHONE}?text=${encodeURIComponent(message)}`}
+function selectServiceEverywhere(service){document.querySelectorAll('select[name="service"]').forEach(select=>{select.value=service;const whatsapp=select.closest('form')?.querySelector('.form-whatsapp');if(whatsapp)whatsapp.href=whatsappLink(service)})}
+function openEnquiry(service){document.querySelector('#modalTitle').textContent=`Enquire about ${service}`;document.querySelector('#modalCopy').textContent=`Choose WhatsApp for an immediate service-specific enquiry, or use our direct enquiry form.`;document.querySelector('#emailEnquiry').dataset.service=service;document.querySelector('#whatsappEnquiry').href=whatsappLink(service);selectServiceEverywhere(service);dialog.showModal()}
+document.addEventListener('click', e=>{const serviceLink=e.target.closest('.enquire');if(serviceLink)selectServiceEverywhere(serviceLink.dataset.service);const quoteButton=e.target.closest('.open-quote');if(quoteButton)openEnquiry(quoteButton.dataset.service);if(e.target.closest('.modal-close')) e.target.closest('dialog').close();});
+document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click', e=>{if(e.target===d)d.close()}));
+document.querySelectorAll('.enquiry-form').forEach(form=>{const serviceSelect=form.querySelector('select[name="service"]');const whatsapp=form.querySelector('.form-whatsapp');if(serviceSelect&&whatsapp){const updateWhatsApp=()=>{whatsapp.href=serviceSelect.value?whatsappLink(serviceSelect.value):'https://wa.me/919700012237'};serviceSelect.addEventListener('change',updateWhatsApp);updateWhatsApp()}});
+const menu=document.querySelector('.menu-toggle'),nav=document.querySelector('nav');menu.addEventListener('click',()=>{nav.classList.toggle('show');menu.setAttribute('aria-expanded',nav.classList.contains('show'))});document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('show')));document.querySelector('#year').textContent=new Date().getFullYear();
